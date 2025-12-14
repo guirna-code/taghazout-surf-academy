@@ -4,23 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobile Menu Toggle with smooth animation
     const menuBtn = document.querySelector('.header__menu-btn');
     const menu = document.querySelector('.header__menu');
-    
-    if (menuBtn && menu) {
-        menuBtn.addEventListener('click', function() {
-            const isOpening = !menu.classList.contains('header__menu--open');
-            menu.classList.toggle('header__menu--open');
-            menuBtn.textContent = menu.classList.contains('header__menu--open') ? '✕' : '☰';
-            
-            // Smooth menu animation
-            if (isOpening) {
-                menu.style.transform = 'translateX(0)';
-                menu.style.opacity = '1';
-            } else {
-                menu.style.transform = 'translateX(100%)';
-                menu.style.opacity = '0';
-            }
-        });
-    }
 
     // Header scroll effect with smooth transition
     const header = document.querySelector('.header');
@@ -183,16 +166,32 @@ style.textContent = `
         scroll-behavior: smooth;
     }
 `;
-document.head.appendChild(style);
+document.addEventListener('DOMContentLoaded', function() {
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            video.play();   // Start when visible
-        } else {
-            video.pause();  // Pause when not visible
-        }
-    });
-}, { threshold: 0.5 });
+    const slides = document.querySelectorAll(".slider img");
+    let slideIndex = 0;
 
-observer.observe(video);
+    function showSlide(index) {
+        slides.forEach(slide => {
+            slide.style.opacity = 0;       // hide all slides
+            slide.style.transition = "opacity 1.5s ease-in-out";
+            slide.style.position = "absolute";
+            slide.style.top = 0;
+            slide.style.left = 0;
+            slide.style.width = "100%";
+            slide.style.height = "100%";
+            slide.style.objectFit = "cover";
+        });
+        slides[index].style.opacity = 1;   // show current slide
+    }
+
+    // Initialize first slide
+    showSlide(slideIndex);
+
+    // Automatic slide every 5 seconds
+    setInterval(() => {
+        slideIndex = (slideIndex + 1) % slides.length;
+        showSlide(slideIndex);
+    }, 5000);
+
+});
