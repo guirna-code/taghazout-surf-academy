@@ -195,3 +195,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 5000);
 
 });
+// Append the style to the head
+const heroSection = document.getElementById('heroSection');
+        const dots = document.querySelectorAll('.dot');
+        const slideContents = document.querySelectorAll('.slide-content');
+        
+        const backgroundImages = [
+            'asset/images/teachsurf.jpeg',
+            'asset/images/surfgroup.jpeg',
+            'asset/images/surf7.jpeg'
+        ];
+
+        let currentIndex = 0;
+
+        function changeSlide(index) {
+            currentIndex = index;
+            
+            // Change background
+            heroSection.style.backgroundImage = `url('${backgroundImages[index]}')`;
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Update content
+            slideContents.forEach((content, i) => {
+                if (i === index) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                changeSlide(index);
+            });
+        });
+
+        // Auto-slide every 5 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % backgroundImages.length;
+            changeSlide(currentIndex);
+        }, 5000);
+
+
