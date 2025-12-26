@@ -153,7 +153,7 @@
         }
 
         /* ===== SECTION STYLES ===== */
-        .section {
+       .section {
             padding: 80px 0;
         }
 
@@ -213,23 +213,96 @@
         .card__body {
             padding: 25px;
             flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         .card__title {
             font-size: 22px;
             color: #005ea6;
-            margin-bottom: 15px;
+            margin: 0;
+        }
+
+        .card__price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #005ea6;
+            background: #e8f4f8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            white-space: nowrap;
         }
 
         .card__text {
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.6;
-            list-style-position: inside;
+            list-style: none;
+            padding-left: 0;
         }
 
         .card__text li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .card__text li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #005ea6;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .private-lesson {
+            background: #fff3cd;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: auto;
+            border-left: 4px solid #ffc107;
+        }
+
+        .private-lesson-text {
+            color: #856404;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .lessons-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section__title {
+                font-size: 32px;
+            }
+
+            .card__header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .card__price {
+                font-size: 20px;
+            }
         }
 
         /* ===== TESTIMONIAL SECTION ===== */
